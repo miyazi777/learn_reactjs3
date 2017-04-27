@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>2-5</title>
+  <title>2-12</title>
   <meta charset="UTF-8">
 </head>
 <body>
@@ -11,6 +11,37 @@
   <script>
     // 入力された文字の数を数えて表示するコンポーネント
     var TextAreaCounter = React.createClass({
+
+      // ロガー
+      _log: function(methodName, args) {
+        console.log(methodName, args);
+      },
+      // 最初の描画の前
+      componentWillMount: function() {
+        this._log('componentWillMount', arguments);
+      },
+      // 最初の描画の後
+      componentDidMount: function() {
+        this._log('componentDidMount', arguments);
+      },
+      // ２回目以降の描画の前
+      componentWillUpdate: function() {
+        this._log('componentWillUpdate', arguments);
+      },
+      // ２回目以降の描画の後
+      componentDidUpdate: function(oldProps, oldState) {
+        this._log('componentDidUpdate', arguments);
+
+        // ７文字以上であれば、古いstateに置き換える
+        if (this.state.text.length > 7) {
+          this.replaceState(oldState);
+        }
+      },
+      // DOMから削除される前
+      componentWillUnmount: function() {
+        this._log('componentWillUnmount', arguments);
+      },
+
       // stateの初期化
       getInitialState: function() {
         return {
