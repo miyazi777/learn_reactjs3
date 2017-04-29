@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2-13</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div id="app"></div>
+  <script src="react/build/react.js"></script>
+  <script src="react/build/react-dom.js"></script>
+  <script>
+
+
+    // ロガー
+    var logMixin = {
+      _log: function(methodName, args) {
+        console.log(methodName, args);
+      },
+      // 最初の描画の前
+      componentWillMount: function() {
+        this._log('componentWillMount', arguments);
+      },
+      // 最初の描画の後
+      componentDidMount: function() {
+        this._log('componentDidMount', arguments);
+      },
+      // ２回目以降の描画の前
+      componentWillUpdate: function() {
+        this._log('componentWillUpdate', arguments);
+      },
+      // ２回目以降の描画の後
+      componentDidUpdate: function(oldProps, oldState) {
+        this._log('componentDidUpdate', arguments);
+
+        // ７文字以上であれば、古いstateに置き換える
+        if (this.state.text.length > 7) {
+          this.replaceState(oldState);
+        }
+      },
+      // DOMから削除される前
+      componentWillUnmount: function() {
+        this._log('componentWillUnmount', arguments);
+      },
+    };
+
+    // 入力された文字の数を数えて表示するコンポーネント
+    var TextAreaCounter = React.createClass({
+      name: 'TextAreaCounter',
+      mixins: [logMixin],
+
+      // stateの初期化
+      getInitialState: function() {
+        return {
+          text: this.props.text,
+        };
+      },
+
+      // テキスト変更イベント
+      _textChange: function(ev) {
+        this.setState({
+          text: ev.target.value,
+        });
+      },
+
+      // 型定義
+      propTypes: {
+        text: React.PropTypes.string,
+      },
+
+      // デフォルト値
+      getDefaultProps: function() {
+        return {
+          text: '',
+        };
+      },
+
+      // レンダリング
+      render: function() {
+        return React.DOM.div(null,
+            React.DOM.textarea({
+              value: this.state.text,
+              onChange: this._textChange,
+            }),
+            React.DOM.h3(null, this.state.text.length)
+          );
+      }
+    });
+
+    // コンポーネントを指定IDの要素に紐つける
+    var myTextAreaCounter = ReactDOM.render(
+        React.createElement(TextAreaCounter, {text: "ボブxxx"}),
+      document.getElementById("app")
+    );
+  </script>
+
+</body>
+</html>
