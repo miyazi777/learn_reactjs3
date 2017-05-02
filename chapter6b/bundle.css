@@ -1,3 +1,30 @@
+.Button {
+  background-color: #6f001b;
+  border-radius: 28px;
+  border: 0;
+  box-shadow: 0px 1px 1px #d9d9d9;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 15px;
+  text-decoration: none;
+  transition-duration: 0.15;
+  transition-property: transform;
+}
+
+.Button:hover {
+  transform: scale(1.1);
+}
+.Logo {
+  background: purple url('images/whinepad-logo.png');
+  background-size: cover;
+  display: inline-block;
+  height: 60px;
+  vertical-align: middle;
+  width: 100px;
+}
 html {
   background: white;
   font: 16px Arial;
@@ -61,6 +88,12 @@ td {
   vertical-align: middle;
   width: 100px;
 }
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
 html {
   background: white;
   font: 16px Arial;

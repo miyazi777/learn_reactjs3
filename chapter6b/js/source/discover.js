@@ -1,5 +1,6 @@
 'use strict';
 
+import Button from './components/Button';
 import Logo from './components/Logo';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,6 +13,11 @@ ReactDOM.render(
 		<div style={ {display: 'inline-block', background: 'purple'} }>
 		  <Logo />
 		</div>
+
+		<h2>Button</h2>
+		<div>onClickが指定されたButton: <Button onClick={() => alert('クリックされました')}>クリック</Button></div>
+		<div>hrefが指定されたButton: <Button href="http://reatjs.com">フォローする</Button></div>
+		<div>クラス名が指定されたButton: <Button className="custom">何もしません</Button></div>
 	</div>,
   document.getElementById('pad')
 );
