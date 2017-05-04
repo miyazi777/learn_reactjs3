@@ -16,10 +16,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Button(props) {
+var Button = function Button(props) {
 	var cssclasses = (0, _classnames2.default)('Button', props.className);
-	return props.href ? _react2.default.createElement('a', _extends({}, props, { className: cssclasses })) : _react2.default.createElement('button', _extends({}, props, { className: cssclasses }));;
-}
+	return props.href ? _react2.default.createElement('a', _extends({}, props, { className: cssclasses })) : _react2.default.createElement('button', _extends({}, props, { className: cssclasses }));
+};
 
 Button.propTypes = {
 	href: _react.PropTypes.string

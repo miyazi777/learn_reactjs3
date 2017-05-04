@@ -20829,10 +20829,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Button(props) {
+var Button = function Button(props) {
 	var cssclasses = (0, _classnames2.default)('Button', props.className);
-	return props.href ? _react2.default.createElement('a', _extends({}, props, { className: cssclasses })) : _react2.default.createElement('button', _extends({}, props, { className: cssclasses }));;
-}
+	return props.href ? _react2.default.createElement('a', _extends({}, props, { className: cssclasses })) : _react2.default.createElement('button', _extends({}, props, { className: cssclasses }));
+};
 
 Button.propTypes = {
 	href: _react.PropTypes.string
@@ -20882,9 +20882,90 @@ exports.default = Logo;
 },{"react":182}],185:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Suggest = function (_Component) {
+	_inherits(Suggest, _Component);
+
+	function Suggest(props) {
+		_classCallCheck(this, Suggest);
+
+		var _this = _possibleConstructorReturn(this, (Suggest.__proto__ || Object.getPrototypeOf(Suggest)).call(this, props));
+
+		_this.state = { value: props.defaultValue };
+		return _this;
+	}
+
+	_createClass(Suggest, [{
+		key: 'getValue',
+		value: function getValue() {
+			return this.state.value;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this,
+			    _React$createElement;
+
+			var randomid = Math.random().toString(16).substring(2);
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement('input', (_React$createElement = {
+					list: randomid,
+					defaultValue: this.props.defaultValue,
+					onChange: function onChange(e) {
+						return _this2.setState({ value: e.target.value });
+					}
+				}, _defineProperty(_React$createElement, 'onChange', this._change), _defineProperty(_React$createElement, 'id', this.props.id), _React$createElement)),
+				_react2.default.createElement(
+					'datalist',
+					{ id: randomid },
+					this.props.options.map(function (item, idx) {
+						return _react2.default.createElement('option', { value: item, key: idx });
+					})
+				)
+			);
+		}
+	}]);
+
+	return Suggest;
+}(_react.Component);
+
+Suggest.propTypes = {
+	options: _react.PropTypes.arrayOf(_react.PropTypes.string)
+};
+
+exports.default = Suggest;
+},{"react":182}],186:[function(require,module,exports){
+'use strict';
+
 var _Button = require('./components/Button');
 
 var _Button2 = _interopRequireDefault(_Button);
+
+var _Suggest = require('./components/Suggest');
+
+var _Suggest2 = _interopRequireDefault(_Suggest);
 
 var _Logo = require('./components/Logo');
 
@@ -20954,6 +21035,16 @@ _reactDom2.default.render(_react2.default.createElement(
 						{ className: 'custom' },
 						'\u4F55\u3082\u3057\u307E\u305B\u3093'
 				)
+		),
+		_react2.default.createElement(
+				'h2',
+				null,
+				'Suggest'
+		),
+		_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_Suggest2.default, { options: ['eenie', 'meenie', 'miney', 'mo'] })
 		)
 ), document.getElementById('pad'));
-},{"./components/Button":183,"./components/Logo":184,"react":182,"react-dom":31}]},{},[185]);
+},{"./components/Button":183,"./components/Logo":184,"./components/Suggest":185,"react":182,"react-dom":31}]},{},[186]);
