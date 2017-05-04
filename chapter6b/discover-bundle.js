@@ -20839,6 +20839,206 @@ Button.propTypes = {
 };
 exports.default = Button;
 },{"classnames":2,"react":182}],184:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _FormInput = require('./FormInput');
+
+var _FormInput2 = _interopRequireDefault(_FormInput);
+
+var _Rating = require('./Rating');
+
+var _Rating2 = _interopRequireDefault(_Rating);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Form = function (_Component) {
+	_inherits(Form, _Component);
+
+	function Form() {
+		_classCallCheck(this, Form);
+
+		return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
+	}
+
+	_createClass(Form, [{
+		key: 'getData',
+		value: function getData() {
+			var _this2 = this;
+
+			var data = {};
+			this.props.fields.forEach(function (field) {
+				return data[field.id] = _this2.refs[field.id].getValue();
+			});
+			return data;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			return _react2.default.createElement(
+				'form',
+				{ className: 'Form' },
+				this.props.fields.map(function (field) {
+					var prefilled = _this3.props.initialData && _this3.props.initialData[field.id];
+					if (!_this3.props.readonly) {
+						return _react2.default.createElement(
+							'div',
+							{ className: 'FormRow', key: field.id },
+							_react2.default.createElement(
+								'label',
+								{ className: 'FormLabel', htmlFor: field.id },
+								field.label,
+								':'
+							),
+							_react2.default.createElement(_FormInput2.default, _extends({}, field, { ref: field.id, defaultValue: prefilled }))
+						);
+					}
+
+					if (!prefilled) {
+						return null;
+					}
+
+					return _react2.default.createElement(
+						'div',
+						{ className: 'FormRow', key: field.id },
+						_react2.default.createElement(
+							'span',
+							{ className: 'FormLabel' },
+							field.label,
+							':'
+						),
+						field.type === 'rating' ? _react2.default.createElement(_Rating2.default, { readonly: true, defaultValue: parseInt(prefilled, 10) }) : _react2.default.createElement(
+							'div',
+							null,
+							prefilled
+						)
+					);
+				}, this)
+			);
+		}
+	}]);
+
+	return Form;
+}(_react.Component);
+
+Form.propTypes = {
+	fields: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+		id: _react.PropTypes.string.isRequired,
+		label: _react.PropTypes.string.isRequired,
+		type: _react.PropTypes.string,
+		options: _react.PropTypes.arrayOf(_react.PropTypes.string)
+	})).isRequired,
+	initialData: _react.PropTypes.object,
+	readonly: _react.PropTypes.bool
+};
+
+exports.default = Form;
+},{"./FormInput":185,"./Rating":187,"react":182}],185:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Rating = require('./Rating');
+
+var _Rating2 = _interopRequireDefault(_Rating);
+
+var _Suggest = require('./Suggest');
+
+var _Suggest2 = _interopRequireDefault(_Suggest);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FormInput = function (_Component) {
+	_inherits(FormInput, _Component);
+
+	function FormInput() {
+		_classCallCheck(this, FormInput);
+
+		return _possibleConstructorReturn(this, (FormInput.__proto__ || Object.getPrototypeOf(FormInput)).apply(this, arguments));
+	}
+
+	_createClass(FormInput, [{
+		key: 'getValue',
+		value: function getValue() {
+			return 'value' in this.refs.input // inputがvalueというプロパテイを持っているか？
+			? this.refs.input.value // 持っている場合、DOM上のvalueを取得する
+			: this.refs.input.getValue(); // 持っていない場合、getValue()で取得する。今回のサンプルではSuggestとRatingがこちらを使う
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var common = {
+				id: this.props.id,
+				ref: 'input',
+				defaultValue: this.props.defaultValue
+			};
+
+			switch (this.props.type) {
+				case 'year':
+					return _react2.default.createElement('input', _extends({}, common, { type: 'number', defaultValue: this.props.defaultValue || new Date().getFullYear() }));
+				case 'suggest':
+					return _react2.default.createElement(_Suggest2.default, _extends({}, common, { options: this.props.options }));
+				case 'rating':
+					return _react2.default.createElement(_Rating2.default, _extends({}, common, { defaultValue: parseInt(this.props.defaultValue, 10) }));
+				case 'text':
+					return _react2.default.createElement('textarea', common);
+				default:
+					return _react2.default.createElement('input', _extends({}, common, { type: 'text' }));
+			}
+		}
+	}]);
+
+	return FormInput;
+}(_react.Component);
+
+FormInput.propTypes = {
+	type: _react.PropTypes.oneOf(['year', 'suggest', 'rating', 'text', 'input']),
+	id: _react.PropTypes.string,
+	options: _react.PropTypes.array, // 入力候補のoption
+	defaultValue: _react.PropTypes.any
+};
+
+exports.default = FormInput;
+},{"./Rating":187,"./Suggest":188,"classnames":2,"react":182}],186:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20879,7 +21079,7 @@ var Logo = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Logo;
-},{"react":182}],185:[function(require,module,exports){
+},{"react":182}],187:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21010,7 +21210,7 @@ Rating.defaultProps = {
 };
 
 exports.default = Rating;
-},{"classnames":2,"react":182}],186:[function(require,module,exports){
+},{"classnames":2,"react":182}],188:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21087,12 +21287,20 @@ Suggest.propTypes = {
 };
 
 exports.default = Suggest;
-},{"react":182}],187:[function(require,module,exports){
+},{"react":182}],189:[function(require,module,exports){
 'use strict';
+
+var _Form = require('./components/Form');
+
+var _Form2 = _interopRequireDefault(_Form);
 
 var _Button = require('./components/Button');
 
 var _Button2 = _interopRequireDefault(_Button);
+
+var _FormInput = require('./components/FormInput');
+
+var _FormInput2 = _interopRequireDefault(_FormInput);
 
 var _Suggest = require('./components/Suggest');
 
@@ -21117,98 +21325,203 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
-		'div',
-		{ style: { padding: '20px' } },
+	'div',
+	{ style: { padding: '20px' } },
+	_react2.default.createElement(
+		'h1',
+		null,
+		'\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u4E00\u89A7'
+	),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'Form'
+	),
+	_react2.default.createElement(_Form2.default, {
+		fields: [{ label: '評価', type: 'rating', id: 'rateme' }, { label: 'あいさつ', id: 'freetext' }],
+		initialData: { rateme: 4, freetext: 'こんにちは' } }),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'FormInput'
+	),
+	_react2.default.createElement(
+		'table',
+		null,
 		_react2.default.createElement(
-				'h1',
+			'tbody',
+			null,
+			_react2.default.createElement(
+				'tr',
 				null,
-				'\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u4E00\u89A7'
-		),
-		_react2.default.createElement(
-				'h2',
-				null,
-				'Logo'
-		),
-		_react2.default.createElement(
-				'div',
-				{ style: { display: 'inline-block', background: 'purple' } },
-				_react2.default.createElement(_Logo2.default, null)
-		),
-		_react2.default.createElement(
-				'h2',
-				null,
-				'Button'
-		),
-		_react2.default.createElement(
-				'div',
-				null,
-				'onClick\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
 				_react2.default.createElement(
-						_Button2.default,
-						{ onClick: function onClick() {
-										return alert('クリックされました');
-								} },
-						'\u30AF\u30EA\u30C3\u30AF'
-				)
-		),
-		_react2.default.createElement(
-				'div',
-				null,
-				'href\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
+					'td',
+					null,
+					'\u5358\u7D14\u306A\u5165\u529B\u30D5\u30A3\u30FC\u30EB\u30C9'
+				),
 				_react2.default.createElement(
-						_Button2.default,
-						{ href: 'http://reatjs.com' },
-						'\u30D5\u30A9\u30ED\u30FC\u3059\u308B'
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, null)
 				)
-		),
-		_react2.default.createElement(
-				'div',
+			),
+			_react2.default.createElement(
+				'tr',
 				null,
-				'\u30AF\u30E9\u30B9\u540D\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
 				_react2.default.createElement(
-						_Button2.default,
-						{ className: 'custom' },
-						'\u4F55\u3082\u3057\u307E\u305B\u3093'
+					'td',
+					null,
+					'\u30C7\u30D5\u30A9\u30EB\u30C8\u5024'
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, { defaultValue: '\u30C7\u30D5\u30A9\u30EB\u30C8\u3067\u3059' })
 				)
-		),
-		_react2.default.createElement(
-				'h2',
+			),
+			_react2.default.createElement(
+				'tr',
 				null,
-				'Suggest'
-		),
-		_react2.default.createElement(
-				'div',
+				_react2.default.createElement(
+					'td',
+					null,
+					'\u5E74\u306E\u5165\u529B'
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, { type: 'year' })
+				)
+			),
+			_react2.default.createElement(
+				'tr',
 				null,
-				_react2.default.createElement(_Suggest2.default, { options: ['eenie', 'meenie', 'miney', 'mo'] })
-		),
-		_react2.default.createElement(
-				'h2',
+				_react2.default.createElement(
+					'td',
+					null,
+					'\u8A55\u4FA1'
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, { type: 'rating', defaultValue: 4 })
+				)
+			),
+			_react2.default.createElement(
+				'tr',
 				null,
-				'Rating'
-		),
-		_react2.default.createElement(
-				'div',
+				_react2.default.createElement(
+					'td',
+					null,
+					'\u5165\u529B\u5019\u88DC\u306E\u8868\u793A'
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, { type: 'suggest', options: ['red', 'green', 'blue'], defaultValue: 'green' })
+				)
+			),
+			_react2.default.createElement(
+				'tr',
 				null,
-				'\u521D\u671F\u5024\u306A\u3057:',
-				_react2.default.createElement(_Rating2.default, null)
-		),
-		_react2.default.createElement(
-				'div',
-				null,
-				'\u521D\u671F\u50244:',
-				_react2.default.createElement(_Rating2.default, { defaultValue: 4 })
-		),
-		_react2.default.createElement(
-				'div',
-				null,
-				'\u6700\u592711:',
-				_react2.default.createElement(_Rating2.default, { max: 11 })
-		),
-		_react2.default.createElement(
-				'div',
-				null,
-				'\u8AAD\u307F\u53D6\u308A\u5C02\u7528:',
-				_react2.default.createElement(_Rating2.default, { readonly: true, defaultValue: 3 })
+				_react2.default.createElement(
+					'td',
+					null,
+					'\u5358\u7D14\u306A\u30C6\u30AD\u30B9\u30C8\u30A8\u30EA\u30A2'
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement(_FormInput2.default, { type: 'text' })
+				)
+			)
 		)
+	),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'Logo'
+	),
+	_react2.default.createElement(
+		'div',
+		{ style: { display: 'inline-block', background: 'purple' } },
+		_react2.default.createElement(_Logo2.default, null)
+	),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'Button'
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'onClick\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
+		_react2.default.createElement(
+			_Button2.default,
+			{ onClick: function onClick() {
+					return alert('クリックされました');
+				} },
+			'\u30AF\u30EA\u30C3\u30AF'
+		)
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'href\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
+		_react2.default.createElement(
+			_Button2.default,
+			{ href: 'http://reatjs.com' },
+			'\u30D5\u30A9\u30ED\u30FC\u3059\u308B'
+		)
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'\u30AF\u30E9\u30B9\u540D\u304C\u6307\u5B9A\u3055\u308C\u305FButton: ',
+		_react2.default.createElement(
+			_Button2.default,
+			{ className: 'custom' },
+			'\u4F55\u3082\u3057\u307E\u305B\u3093'
+		)
+	),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'Suggest'
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(_Suggest2.default, { options: ['eenie', 'meenie', 'miney', 'mo'] })
+	),
+	_react2.default.createElement(
+		'h2',
+		null,
+		'Rating'
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'\u521D\u671F\u5024\u306A\u3057:',
+		_react2.default.createElement(_Rating2.default, null)
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'\u521D\u671F\u50244:',
+		_react2.default.createElement(_Rating2.default, { defaultValue: 4 })
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'\u6700\u592711:',
+		_react2.default.createElement(_Rating2.default, { max: 11 })
+	),
+	_react2.default.createElement(
+		'div',
+		null,
+		'\u8AAD\u307F\u53D6\u308A\u5C02\u7528:',
+		_react2.default.createElement(_Rating2.default, { readonly: true, defaultValue: 3 })
+	)
 ), document.getElementById('pad'));
-},{"./components/Button":183,"./components/Logo":184,"./components/Rating":185,"./components/Suggest":186,"react":182,"react-dom":31}]},{},[187]);
+},{"./components/Button":183,"./components/Form":184,"./components/FormInput":185,"./components/Logo":186,"./components/Rating":187,"./components/Suggest":188,"react":182,"react-dom":31}]},{},[189]);
