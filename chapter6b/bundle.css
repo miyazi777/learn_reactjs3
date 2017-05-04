@@ -88,6 +88,32 @@ td {
   vertical-align: middle;
   width: 100px;
 }
+/* thanks to https://css-tricks.com/star-ratings/ */
+.Rating {
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 28px;
+}
+
+.Rating.RatingReadonly{
+  cursor: auto;
+}
+
+.Rating > span {
+  color: grey;
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+
+.Rating .RatingOn:before {
+   color: gold;
+   content: "\2605";
+   left: 0; 
+   padding: 1px;
+   position: absolute;
+}
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
